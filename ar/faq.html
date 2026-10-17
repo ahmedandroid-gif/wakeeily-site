@@ -3,10 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="أسئلة يطرحها العملاء — وكيلي — Wakeeily">
+<meta name="description" content="كيف يتعامل وكيلي مع مستنداتك، وهل تُستخدم لتدريب أي نموذج، وماذا يحدث إذا لم تكن الإجابة في المستندات، والأرقام في الصفحات الممسوحة ضوئياً، والدفع، وكيف نبدأ.">
 <meta name="referrer" content="no-referrer">
 
-<title>أسئلة يطرحها العملاء — وكيلي — Wakeeily</title>
+<title>أسئلة شائعة عن وكيلي: المستندات والدفع وكيف تبدأ</title>
+<link rel="canonical" href="https://wakeeily.com/ar/faq.html">
+<link rel="alternate" hreflang="en" href="https://wakeeily.com/faq.html">
+<link rel="alternate" hreflang="ar" href="https://wakeeily.com/ar/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://wakeeily.com/faq.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="وكيلي">
+<meta property="og:title" content="أسئلة شائعة عن وكيلي: المستندات والدفع وكيف تبدأ">
+<meta property="og:description" content="كيف يتعامل وكيلي مع مستنداتك، وهل تُستخدم لتدريب أي نموذج، وماذا يحدث إذا لم تكن الإجابة في المستندات، والأرقام في الصفحات الممسوحة ضوئياً، والدفع، وكيف نبدأ.">
+<meta property="og:url" content="https://wakeeily.com/ar/faq.html">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:locale:alternate" content="en_US">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <style>@font-face{font-family:"Cormorant Garamond";src:url("../assets/fonts/cormorantgaramond-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:"Cormorant Garamond";src:url("../assets/fonts/cormorantgaramond-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
@@ -26,7 +37,11 @@ html[lang="ar"] body.site{font-family:var(--font-ar);font-size:var(--ar-size);li
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 /* header: the bilingual wordmark and the language switch */
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:clamp(22px,4vw,36px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:clamp(14px,2.2vw,22px)}
+/* the header stays at the top while the page scrolls (owner, 17 Oct 2026: "fly while scrolling … easy to go through"): CSS only, no script;
+   its own background and a hairline so the text beneath never shows through; in-page jumps land below it */
+header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-block-end:1px solid var(--rule)}
+html{scroll-padding-block-start:7rem}
 .brand{display:inline-flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
 .brand svg{width:36px;height:36px;flex:none;display:block}
 .wm-en{font-family:var(--font-en);font-size:1.42rem;font-weight:var(--display-weight);letter-spacing:.01em;line-height:1}
@@ -42,12 +57,18 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .signin:hover{border-color:var(--accent)}
 header.top .wrap{flex-wrap:wrap;row-gap:12px}
 @media (max-width:25em){header.top .wrap{column-gap:10px}.signin{padding-inline:10px}}
+/* phones: the menu is one row that scrolls sideways, so the pinned header stays two short rows */
+@media (max-width:47.99em){.menu{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-block-end:2px}
+  .menu::-webkit-scrollbar{display:none}.menu a{white-space:nowrap;flex:none}header.top .wrap{row-gap:8px}html{scroll-padding-block-start:8.5rem}}
 /* the opening: the headline and one sentence, with a quiet accent line drawn beneath */
 .hero{padding-block:clamp(56px,13vh,150px) clamp(48px,9vh,110px);max-inline-size:48rem}
 .hero h1{font-family:var(--font-en);font-weight:var(--display-weight);font-size:var(--h1-size);line-height:1.06;letter-spacing:var(--tracking);
   margin:0 0 clamp(20px,3vw,30px);text-wrap:balance}
 html[lang="ar"] .hero h1{font-family:var(--font-ar);font-size:var(--h1-ar-size, clamp(2.1rem,4.8vw,3.6rem));line-height:1.45;letter-spacing:0}
 .hero p{font-size:clamp(1.12rem,1.9vw,1.42rem);line-height:1.6;color:var(--ink-2);max-inline-size:40rem;margin:0}
+/* the eyebrow above the home headline: who the service is for (17 Oct 2026) */
+.hero p.eyebrow{font-size:.92rem;line-height:1.5;letter-spacing:.06em;color:var(--accent-ink);max-inline-size:44rem;margin:0 0 clamp(14px,2vw,20px)}
+html[lang="ar"] .hero p.eyebrow{font-size:1.02rem;letter-spacing:0}
 .hero::after{content:"";display:block;inline-size:84px;block-size:2px;background:var(--accent);margin-block-start:clamp(32px,5vw,48px);
   transform-origin:left center}
 html[dir="rtl"] .hero::after{transform-origin:right center}
@@ -101,6 +122,10 @@ html[lang="ar"] .card h3{font-family:var(--font-ar);line-height:1.5}
 .card p{color:var(--ink-2);margin:0;max-inline-size:none}
 .card h3+p>strong:first-child{display:block;font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(1.3rem,2vw,1.6rem);line-height:1.3;color:var(--accent-ink);margin-block-end:6px}
 html[lang="ar"] .card h3+p>strong:first-child{font-family:var(--font-ar);line-height:1.6}
+/* the featured pilot card (17 Oct 2026): the price with its label beside it; the credit line directly under it, as visible as the price */
+.feature .card h3+p>strong:first-child{display:inline;margin-inline-end:.5em}
+.feature .card h3+p+p>strong:only-child{display:block;font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(1.3rem,2vw,1.6rem);line-height:1.3;color:var(--accent-ink)}
+html[lang="ar"] .feature .card h3+p+p>strong:only-child{font-family:var(--font-ar);line-height:1.6}
 .card ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--ink-2)}
 .card li{padding-inline-start:1.2em;position:relative}
 .card li::before{content:"";position:absolute;inset-inline-start:0;inset-block-start:.75em;inline-size:.55em;block-size:1px;background:var(--accent)}
@@ -141,23 +166,23 @@ html[lang="en"]{--ink-2:#2b3647}@media (prefers-color-scheme:dark){html[lang="en
 <p>إجابات قصيرة وواضحة.</p>
 </section>
 <section class="s s-1 k-qa"><h2>الإجابات</h2>
-<div class="cards cards-1"><div class="card"><h3>أين تذهب ملفاتي؟</h3>
-<p>تُقرأ مستنداتك على جهازنا في مصر فقط، دون أي خدمة ذكاء اصطناعي خارجية. لا يسجّل الدخول إلا أصحاب الحسابات المدعوّة، كلٌّ برمز لمرة واحدة يُرسل إلى بريده الإلكتروني، ثم بكلمة مرور حسابه. وفي الطريق، يمر اتصالك عبر Cloudflare، مزوّد تسجيل الدخول لدينا، حيث يُفك تشفيره ثم يُشفَّر من جديد.</p>
+<div class="cards cards-1"><div class="card"><h3>كيف يتعامل وكيلي مع مستنداتي؟</h3>
+<p>يقرأ وكيلي مستنداتك آليًا بنظام ذكاء اصطناعي يعمل على جهازنا الخاص في مصر، ويتعامل مع المستندات المالية والعقود بالعربية والإنجليزية. لا تُرسل مستنداتك إلى أي مزوّد ذكاء اصطناعي خارجي، ولا تُستخدم في تدريب أي نموذج. ولا يراجع فريقنا مستنداتك ضمن الخدمة، بل يراجع فريقك النتائج بنفسه.</p>
 </div><div class="card"><h3>هل تدرّبون أي نموذج على ملفاتنا؟</h3>
 <p>لا يُستخدم أي شيء ترفعه لتدريب أي نموذج.</p>
 </div><div class="card"><h3>ماذا يحدث إذا لم تكن الإجابة في المستندات؟</h3>
-<p>كل إجابة تذكر الفقرة التي جاءت منها، وتقول «غير موجود في المستندات» إذا لم تكن الإجابة هناك. وفي اختباراتنا، امتنع النظام عن الإجابة عن <span class="fig">4 من 4</span> أسئلة لا إجابة لها في المستندات، بدل التخمين.</p>
+<p>كل إجابة تذكر الفقرة التي جاءت منها، وتقول «غير موجود في المستندات» إذا لم تكن الإجابة هناك. وفي اختباراتنا على مستندات أعددناها بأنفسنا، امتنع النظام عن الإجابة عن <span class="fig">4 من 4</span> أسئلة لا إجابة لها في المستندات، بدل التخمين.</p>
 </div><div class="card"><h3>كيف تتعاملون مع الأرقام في الصفحات الممسوحة ضوئياً؟</h3>
-<p>الصفحات الممسوحة ضوئياً تُقرأ أيضاً، وكل رقم مأخوذ منها يُعلَّم ليراجعه شخص. ولا يُقدَّم رقم ممسوح على أنه متحقَّق منه.</p>
+<p>الصفحات الممسوحة ضوئياً تُقرأ أيضاً. والأرقام المقروءة من صفحة ممسوحة تُعلَّم ليراجعها فريقك.</p>
 </div><div class="card"><h3>هل نحتاج إلى قسم تكنولوجيا معلومات؟</h3>
 <p>يعمل من المتصفح، دون أي تركيب أو ربط بأنظمتك. هاتف أو حاسوب محمول ومتصفح، ويمكن لفريقك أن يبدأ يوم إعداد حساباته.</p>
 </div><div class="card"><h3>كيف ندفع؟</h3>
 <p>تدفع بالجنيه المصري، بتحويل بنكي أو عبر إنستاباي. الأسعار غير شاملة ضريبة القيمة المضافة؛ والفواتير بالجنيه المصري.</p>
 </div><div class="card"><h3>كيف نبدأ؟</h3>
-<p>تبدأ بمكالمة مجانية مدتها 30 دقيقة، بالعربية أو الإنجليزية، عن مسار عملك ومستنداتك. ثم مشروع تجريبي محدد النطاق: سعر ثابت، ومعايير نجاح تُكتب في الاتفاق قبل أي عمل، وتقرير مكتوب بالنتائج المقيسة. وإذا أقنعتك أرقام المشروع التجريبي، يبدأ الاشتراك الشهري: مستندات جديدة تدخل، وإجابات تخرج، كل شهر.</p></div></div></section>
+<p>تبدأ بمكالمة مجانية مدتها 30 دقيقة، بالعربية أو الإنجليزية، عن مسار عملك ومستنداتك. ثم مشروع تجريبي محدد النطاق: سعر ثابت، ومعايير نجاح تُكتب في الاتفاق قبل أي عمل، وتقرير مكتوب بالنتائج المقيسة. وإذا أقنعتك أرقام المشروع التجريبي، يبدأ الاشتراك الشهري: مستندات جديدة تدخل، وإجابات تخرج، كل شهر. لا يسجّل الدخول إلا أصحاب الحسابات المدعوّة، كلٌّ برمز لمرة واحدة يُرسل إلى بريده الإلكتروني، ثم بكلمة مرور حسابه.</p></div></div></section>
 <section class="s s-next k-next"><h2>الخطوة التالية</h2>
 <p>عرض التأسيس: أول 5 عملاء يحصلون على خصم 30% على خطتهم لمدة 12 شهراً. يُغلق العرض في 31 ديسمبر 2026، أو قبل ذلك متى اكتملت الأماكن الخمسة.</p>
-<p><a class="cta" href="mailto:hello@wakeeily.com?subject=%D9%85%D9%83%D8%A7%D9%84%D9%85%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%83%D8%B4%D8%A7%D9%81%D9%8A%D8%A9">احجز مكالمة مجانية مدتها 30 دقيقة</a></p></section>
+<p><a class="cta" href="mailto:hello@wakeeily.com?subject=%D9%85%D9%83%D8%A7%D9%84%D9%85%D8%A9%20%D9%84%D9%84%D8%AA%D8%B9%D8%B1%D9%91%D9%81%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AD%D8%AA%D9%8A%D8%A7%D8%AC%D8%A7%D8%AA%D9%83">احجز مكالمة مجانية مدتها 30 دقيقة</a></p></section>
 </div></main>
 <footer class="foot"><div class="wrap">وكيلي · مصر · hello@wakeeily.com</div></footer>
 </body>

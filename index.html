@@ -3,10 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Ask your documents. Get the answer — with the proof. — Wakeeily">
+<meta name="description" content="Ask your contracts, statements and reports in Arabic or English and get answers that quote the passage they came from. Local AI processing in Egypt, priced in pounds.">
 <meta name="referrer" content="no-referrer">
 
-<title>Ask your documents. Get the answer — with the proof. — Wakeeily</title>
+<title>AI for finance, accounting and legal teams — Wakeeily</title>
+<link rel="canonical" href="https://wakeeily.com/">
+<link rel="alternate" hreflang="en" href="https://wakeeily.com/">
+<link rel="alternate" hreflang="ar" href="https://wakeeily.com/ar/">
+<link rel="alternate" hreflang="x-default" href="https://wakeeily.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wakeeily">
+<meta property="og:title" content="AI for finance, accounting and legal teams — Wakeeily">
+<meta property="og:description" content="Ask your contracts, statements and reports in Arabic or English and get answers that quote the passage they came from. Local AI processing in Egypt, priced in pounds.">
+<meta property="og:url" content="https://wakeeily.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_EG">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>@font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorantgaramond-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorantgaramond-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
@@ -26,7 +37,11 @@ html[lang="ar"] body.site{font-family:var(--font-ar);font-size:var(--ar-size);li
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 /* header: the bilingual wordmark and the language switch */
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:clamp(22px,4vw,36px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:clamp(14px,2.2vw,22px)}
+/* the header stays at the top while the page scrolls (owner, 17 Oct 2026: "fly while scrolling … easy to go through"): CSS only, no script;
+   its own background and a hairline so the text beneath never shows through; in-page jumps land below it */
+header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-block-end:1px solid var(--rule)}
+html{scroll-padding-block-start:7rem}
 .brand{display:inline-flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
 .brand svg{width:36px;height:36px;flex:none;display:block}
 .wm-en{font-family:var(--font-en);font-size:1.42rem;font-weight:var(--display-weight);letter-spacing:.01em;line-height:1}
@@ -42,12 +57,18 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .signin:hover{border-color:var(--accent)}
 header.top .wrap{flex-wrap:wrap;row-gap:12px}
 @media (max-width:25em){header.top .wrap{column-gap:10px}.signin{padding-inline:10px}}
+/* phones: the menu is one row that scrolls sideways, so the pinned header stays two short rows */
+@media (max-width:47.99em){.menu{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-block-end:2px}
+  .menu::-webkit-scrollbar{display:none}.menu a{white-space:nowrap;flex:none}header.top .wrap{row-gap:8px}html{scroll-padding-block-start:8.5rem}}
 /* the opening: the headline and one sentence, with a quiet accent line drawn beneath */
 .hero{padding-block:clamp(56px,13vh,150px) clamp(48px,9vh,110px);max-inline-size:48rem}
 .hero h1{font-family:var(--font-en);font-weight:var(--display-weight);font-size:var(--h1-size);line-height:1.06;letter-spacing:var(--tracking);
   margin:0 0 clamp(20px,3vw,30px);text-wrap:balance}
 html[lang="ar"] .hero h1{font-family:var(--font-ar);font-size:var(--h1-ar-size, clamp(2.1rem,4.8vw,3.6rem));line-height:1.45;letter-spacing:0}
 .hero p{font-size:clamp(1.12rem,1.9vw,1.42rem);line-height:1.6;color:var(--ink-2);max-inline-size:40rem;margin:0}
+/* the eyebrow above the home headline: who the service is for (17 Oct 2026) */
+.hero p.eyebrow{font-size:.92rem;line-height:1.5;letter-spacing:.06em;color:var(--accent-ink);max-inline-size:44rem;margin:0 0 clamp(14px,2vw,20px)}
+html[lang="ar"] .hero p.eyebrow{font-size:1.02rem;letter-spacing:0}
 .hero::after{content:"";display:block;inline-size:84px;block-size:2px;background:var(--accent);margin-block-start:clamp(32px,5vw,48px);
   transform-origin:left center}
 html[dir="rtl"] .hero::after{transform-origin:right center}
@@ -101,6 +122,10 @@ html[lang="ar"] .card h3{font-family:var(--font-ar);line-height:1.5}
 .card p{color:var(--ink-2);margin:0;max-inline-size:none}
 .card h3+p>strong:first-child{display:block;font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(1.3rem,2vw,1.6rem);line-height:1.3;color:var(--accent-ink);margin-block-end:6px}
 html[lang="ar"] .card h3+p>strong:first-child{font-family:var(--font-ar);line-height:1.6}
+/* the featured pilot card (17 Oct 2026): the price with its label beside it; the credit line directly under it, as visible as the price */
+.feature .card h3+p>strong:first-child{display:inline;margin-inline-end:.5em}
+.feature .card h3+p+p>strong:only-child{display:block;font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(1.3rem,2vw,1.6rem);line-height:1.3;color:var(--accent-ink)}
+html[lang="ar"] .feature .card h3+p+p>strong:only-child{font-family:var(--font-ar);line-height:1.6}
 .card ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--ink-2)}
 .card li{padding-inline-start:1.2em;position:relative}
 .card li::before{content:"";position:absolute;inset-inline-start:0;inset-block-start:.75em;inline-size:.55em;block-size:1px;background:var(--accent)}
@@ -137,11 +162,12 @@ html[lang="en"]{--ink-2:#2b3647}@media (prefers-color-scheme:dark){html[lang="en
 <body class="site page-home">
 <header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="Wakeeily — وكيلي"><span class="wm-en" lang="en">Wakeeily</span><span class="wm-sep" aria-hidden="true"></span><span class="wm-ar" lang="ar">وكيلي</span></a><nav class="menu" aria-label="Pages"><a href="index.html" aria-current="page">Home</a><a href="who.html">Who it&#x27;s for</a><a href="pricing.html">Pricing</a><a href="why.html">Why Wakeeily</a><a href="faq.html">Questions</a></nav><nav class="tools" aria-label="Language and sign-in"><a class="switch" href="ar/index.html" lang="ar">العربية</a></nav></div></header>
 <main><div class="wrap">
-<section class="hero"><h1>Ask your documents. Get the answer — with the proof.</h1>
+<section class="hero"><p class="eyebrow">For accounting and audit firms, finance teams, and legal teams</p>
+<h1>Ask your documents. Get the answer — with the proof.</h1>
 <p>Wakeeily reads your contracts, invoices and correspondence, in Arabic and English, and answers your questions, quoting the exact passage each answer comes from.</p>
 </section>
 <section class="s s-1 k-points"><h2>What we do</h2>
-<ul class="points"><li><strong>Cited answers.</strong> Ask in Arabic or English: each answer names the passage and the version of the document it came from, and says "not in the documents" when the answer isn't there. On our test documents, <span class="fig">28 of 28</span> answerable questions were answered correctly.</li><li><strong>Contract and invoice checks.</strong> A nine-point contract review with the quoted evidence for each point, and invoice figures checked against the source text; <span class="fig">40 of 40</span> test invoices came back with every figure correct.</li><li><strong>Routine paperwork, done for you.</strong> An AI agent turns your files into ready-to-use tables and registers, and a person checks every result before you use it.</li></ul>
+<ul class="points"><li><strong>Cited answers.</strong> Ask in Arabic or English: each answer names the passage and the version of the document it came from, and says "not in the documents" when the answer isn't there. On invented test documents in Arabic and English, <span class="fig">28 of 28</span> answerable questions were answered correctly.</li><li><strong>Contract and invoice checks.</strong> A nine-point contract review with the quoted evidence for each point, and invoice figures checked against the source text; <span class="fig">40 of 40</span> invented test invoices came back with their totals, VAT and line amounts correct.</li><li><strong>Routine paperwork, done for you.</strong> An AI agent turns your files into ready-to-use tables and registers, and your team reviews every result before using it.</li></ul>
 </section>
 <section class="s s-2 k-band"><h2>Why it's private</h2>
 <p>Your documents are processed on our own private machine, and no cloud model ever reads them. This website uses no cookies and no tracking tools.</p>
@@ -153,7 +179,8 @@ html[lang="en"]{--ink-2:#2b3647}@media (prefers-color-scheme:dark){html[lang="en
 <p>Write to hello@wakeeily.com with a few lines about your firm and your documents; we reply within two business days. Please describe your documents rather than attaching them.</p></section>
 <section class="s s-next k-next"><h2>Next step</h2>
 <p>Founding offer: the first 5 clients get 30 % off their plan for 12 months. The offer closes on 31 December 2026, or earlier, when the five places are taken.</p>
-<p><a class="cta" href="mailto:hello@wakeeily.com?subject=Discovery%20call">Book a free 30-minute call</a></p></section>
+<p><a class="cta" href="mailto:hello@wakeeily.com?subject=Discovery%20call">Book a free 30-minute call</a></p>
+<p>Start with a public or sample document. No confidential company or client files are needed for the first meeting.</p></section>
 </div></main>
 <footer class="foot"><div class="wrap">Wakeeily · Egypt · hello@wakeeily.com</div></footer>
 </body>
