@@ -23,8 +23,8 @@
 @font-face{font-family:"Cormorant Garamond";src:url("assets/fonts/cormorantgaramond-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:"Amiri";src:url("assets/fonts/amiri-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Amiri";src:url("assets/fonts/amiri-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-:root{--paper:#fbfaf7;--paper2:#f2efe8;--ink:#0e1a2b;--ink-2:#4a5566;--rule:#e2ded5;--accent:#9a7b3f;--accent-ink:#7c6231;--font-en:"Cormorant Garamond",Georgia,serif;--font-ar:"Amiri","Noto Naskh Arabic",serif;--body-size:1.22rem;--ar-size:1.41rem;--display-weight:500;--tracking:-0.005em;--h1-size:clamp(2.6rem, 5.8vw, 4.6rem);color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--paper:#0e1a2b;--paper2:#14233a;--ink:#f2efe8;--ink-2:#a9b1bd;--rule:#25334a;--accent:#c8a764;--accent-ink:#c8a764;color-scheme:dark}}
+:root{--paper:#0e1a2b;--paper2:#13223a;--ink:#f2efe8;--ink-2:#b9c1cc;--rule:#25344d;--accent:#c8a764;--accent-ink:#d8bb7c;--font-en:"Cormorant Garamond",Georgia,serif;--font-ar:"Amiri","Noto Naskh Arabic",serif;--body-size:1.22rem;--ar-size:1.41rem;--display-weight:500;--tracking:-0.005em;--h1-size:clamp(2.7rem, 6.4vw, 5.2rem);color-scheme:dark}
+
 /* The one-page site's layout, shared by every design direction; each direction supplies its tokens (--paper … --accent-ink), its two faces
    (--font-en, --font-ar) and its type settings. Logical properties throughout, so the Arabic page mirrors right to left by itself. Motion is CSS
    only and switched off for visitors who prefer reduced motion. */
@@ -157,12 +157,177 @@ section.s{animation:fade 1s .4s both}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{*,*::before,*::after{animation:none!important}}
 
-html[lang="en"]{--ink-2:#2b3647}@media (prefers-color-scheme:dark){html[lang="en"]{--ink-2:#c9d0da}}html[lang="ar"] .hero p{font-size:clamp(1.32rem,2.23vw,1.67rem)}html[lang="ar"] .points li>strong:first-child{font-size:clamp(1.47rem,2.35vw,1.7rem)}html[lang="ar"] .steps li::before{font-size:1.35rem}</style>
+
+/* night — the visual upgrade (owner, 17 Oct 2026): dark first on every page, a brass glow behind the headline, a pill menu, the product
+   picture and the examples built in HTML and CSS, feature cards with gradient borders, the و as a brass emblem, a faint star pattern, a closing
+   band. No image, no script, nothing from another host;  is the page's path to the site's own assets. Motion is CSS only, and the base
+   sheet switches every animation and transition off for visitors who prefer reduced motion. Colours come from the theme's tokens; the few
+   literal brass and ivory values below were checked for AA (theme.json contrastNote). */
+:root{--card:#16273f;--glass:rgba(242,239,232,.035);--line:rgba(242,239,232,.14);--brass-1:#f3e2b8;--brass-2:#ddbd7a;--brass-3:#c29a55;
+  --glow:rgba(200,167,100,.22)}
+main{overflow-x:hidden;overflow-x:clip}
+::selection{background:rgba(200,167,100,.35);color:var(--ink)}
+a:focus-visible{outline-color:var(--brass-2)}
+
+/* header: translucent navy, the page menu as a pill, sign-in as a brass-outlined pill */
+header.top{background:rgba(14,26,43,.84);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-block-end-color:rgba(242,239,232,.07)}
+.menu{gap:2px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--glass)}
+.menu a{padding:7px 15px;border-radius:999px;border-block-end:0;color:var(--ink-2)}
+.menu a:hover{color:var(--ink);background:rgba(242,239,232,.07)}
+.menu a[aria-current="page"]{color:var(--paper);background:var(--ink)}
+.signin{border-color:var(--accent);color:var(--accent-ink);padding:7px 17px}
+.signin:hover{background:rgba(200,167,100,.13);color:var(--brass-1)}
+.switch{color:var(--ink-2)}
+@media (max-width:47.99em){.menu{border-radius:22px}.menu a{padding:6px 12px}}
+
+/* the opening: glow, stars, the brass و, the headline's second line in a brass gradient */
+.hero{position:relative;isolation:isolate;max-inline-size:none;padding-block:clamp(52px,10vh,120px) clamp(30px,5vh,56px)}
+.hero>p,.hero>h1{max-inline-size:50rem;position:relative}
+.hero::before{content:"";position:absolute;z-index:-1;inset-block-start:-34%;inset-inline-start:-24%;inline-size:min(1150px,150%);aspect-ratio:16/10;
+  background:radial-gradient(closest-side,var(--glow),rgba(200,167,100,.08) 48%,transparent 74%);pointer-events:none;animation:breathe 10s ease-in-out infinite alternate}
+.hero::after{background:linear-gradient(90deg,var(--brass-2),transparent)}
+html[dir="rtl"] .hero::after{background:linear-gradient(270deg,var(--brass-2),transparent)}
+@keyframes breathe{from{opacity:.78;transform:scale(1)}to{opacity:1;transform:scale(1.06)}}
+.decor{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.decor .stars{position:absolute;inset:-12% -40% -10%;background:url("assets/stars.svg") 0 0/72px 72px repeat;opacity:.06;
+  -webkit-mask-image:radial-gradient(60% 70% at 70% 40%,#000,transparent 75%);mask-image:radial-gradient(60% 70% at 70% 40%,#000,transparent 75%)}
+html[dir="rtl"] .decor .stars{-webkit-mask-image:radial-gradient(60% 70% at 30% 40%,#000,transparent 75%);mask-image:radial-gradient(60% 70% at 30% 40%,#000,transparent 75%)}
+@media (min-width:60em){.hero>p,.hero>h1{max-inline-size:min(50rem,calc(100% - clamp(230px,22vw,300px)))}.hero h1{font-size:clamp(2.7rem,5vw,4.3rem)}}
+.decor .emblem{position:absolute;inset-inline-end:3%;inset-block-start:46%;translate:0 -50%;inline-size:clamp(140px,17vw,230px);aspect-ratio:36/44;
+  background:linear-gradient(125deg,#f8ecc9 0%,#e3c37f 22%,#a9823f 48%,#f1d99f 63%,#b98f4a 82%,#e9cf93 100%) 0 0/220% 220%;
+  -webkit-mask:url("assets/waw.svg") center/contain no-repeat;mask:url("assets/waw.svg") center/contain no-repeat;
+  filter:drop-shadow(0 0 28px rgba(200,167,100,.45));opacity:.92;animation:sheen 12s ease-in-out infinite alternate}
+@keyframes sheen{from{background-position:0 0}to{background-position:100% 100%}}
+.decor .ring{position:absolute;inset-inline-end:calc(3% - 40px);inset-block-start:46%;translate:0 -50%;inline-size:clamp(220px,26vw,330px);aspect-ratio:1;
+  border-radius:50%;border:1px solid rgba(221,189,122,.18);box-shadow:inset 0 0 60px rgba(200,167,100,.08)}
+@media (max-width:59.99em){.hero{padding-block-start:clamp(104px,16vw,128px)}
+  .decor .emblem{inline-size:58px;inset-block-start:22px;translate:none;opacity:.9}
+  .decor .ring{inline-size:96px;inset-block-start:6px;inset-inline-end:calc(3% - 19px);translate:none}}
+.hero h1{font-size:var(--h1-size);line-height:1.02;letter-spacing:-.012em}
+.hero h1 .h1-a,.hero h1 .h1-b{display:block}
+.hero h1 .h1-b{background:linear-gradient(100deg,var(--brass-1) 0%,var(--brass-2) 46%,var(--brass-3) 100%);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;padding-block-end:.08em}
+html[dir="rtl"] .hero h1 .h1-b{background-image:linear-gradient(260deg,var(--brass-1) 0%,var(--brass-2) 46%,var(--brass-3) 100%)}
+html[lang="ar"] .hero h1{line-height:1.5;font-size:var(--h1-ar-size,clamp(2.3rem,5.4vw,4rem))}
+@media (forced-colors:active){.hero h1 .h1-b{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}}
+.page-pricing .hero h1,.page-why .hero h1,.page-who .hero h1,.page-faq .hero h1{font-size:clamp(2.2rem,4.8vw,3.8rem)}
+html[lang="ar"] .page-pricing .hero h1,html[lang="ar"] .page-why .hero h1,html[lang="ar"] .page-who .hero h1,html[lang="ar"] .page-faq .hero h1{font-size:clamp(2rem,4.4vw,3.2rem)}
+.hero p.eyebrow{color:var(--accent-ink)}
+.hero>p:not(.eyebrow){color:var(--ink-2)}
+
+/* the product picture and the example cards: a framed app window */
+.app{margin:0;border-radius:20px;background:linear-gradient(180deg,#172a44,#122138);border:1px solid rgba(221,189,122,.22);
+  box-shadow:0 30px 80px -40px rgba(0,0,0,.8),0 0 0 1px rgba(0,0,0,.25),0 0 70px -30px rgba(200,167,100,.35);overflow:hidden;text-align:start}
+.app-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-block-end:1px solid rgba(242,239,232,.08);background:rgba(242,239,232,.03)}
+.app-bar .dot{inline-size:9px;block-size:9px;border-radius:50%;background:rgba(242,239,232,.18)}
+.app-bar .dot:first-child{background:rgba(221,189,122,.75)}
+.app-bar .app-name{margin-inline-start:auto;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+html[lang="ar"] .app-bar .app-name{letter-spacing:0;text-transform:none}
+.app-body{display:grid;gap:14px;padding:clamp(16px,2.6vw,26px)}
+.app .doc{display:flex;align-items:center;gap:10px;margin:0;font-size:.86rem;line-height:1.45;color:var(--ink-2)}
+.app .doc::before{content:"";flex:none;inline-size:22px;block-size:26px;border-radius:3px;border:1px solid rgba(221,189,122,.55);
+  background:linear-gradient(transparent 38%,rgba(221,189,122,.35) 38% 44%,transparent 44% 56%,rgba(221,189,122,.35) 56% 62%,transparent 62%) center/12px 100% no-repeat}
+.app .q{margin:0;justify-self:end;max-inline-size:88%;padding:10px 15px;border-radius:16px 16px 4px 16px;background:var(--ink);color:var(--paper);font-size:1rem;line-height:1.5}
+.app[dir="rtl"] .q{border-radius:16px 16px 16px 4px}
+.app .a{display:grid;gap:9px;max-inline-size:96%;padding:13px 16px;border-radius:16px 16px 16px 4px;background:rgba(242,239,232,.05);border:1px solid rgba(242,239,232,.08);
+  color:var(--ink);font-size:.98rem;line-height:1.6}
+.app[dir="rtl"] .a{border-radius:16px 16px 4px 16px}
+.app .a p{margin:0;max-inline-size:none}
+.app .a .quote{font-size:.9rem;color:var(--ink-2);padding-inline-start:12px;border-inline-start:2px solid var(--accent)}
+.app .a .source{font-size:.86rem;color:var(--ink-2);margin-top:10px;padding-top:9px;border-top:1px solid var(--rule);font-variant-numeric:lining-nums tabular-nums}
+.app .num{color:var(--brass-1);font-weight:600;white-space:nowrap}
+.app,.k-numbers li>strong:first-child,.chip{font-variant-numeric:lining-nums tabular-nums}
+.app .num.marked{text-decoration:underline dotted var(--brass-2);text-underline-offset:4px}
+.app .chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 11px;border-radius:999px;font-size:.8rem;line-height:1.6;white-space:nowrap}
+.chip.page{background:rgba(221,189,122,.14);border:1px solid rgba(221,189,122,.45);color:var(--brass-1)}
+.chip.check{border:1px dashed rgba(242,239,232,.4);color:var(--ink)}
+.chip.check::before{content:"";inline-size:7px;block-size:7px;border-radius:50%;background:var(--brass-2)}
+.app .a.refusal{color:var(--brass-1);font-weight:600}
+html[lang="ar"] .app,.app[lang="ar"]{font-family:var(--font-ar)}
+.app[lang="en"]{font-family:var(--font-en)}
+.app[lang="ar"] .q,.app[lang="ar"] .a{font-size:1.08rem;line-height:1.85}
+.picture{margin-block:clamp(8px,2vw,20px) clamp(48px,8vh,88px);position:relative}
+.picture::before{content:"";position:absolute;inset:8% 6% -6%;z-index:-1;background:radial-gradient(closest-side,rgba(200,167,100,.16),transparent);filter:blur(10px)}
+.picture .app{max-inline-size:860px;margin-inline:auto}
+.picture .app-body{padding:clamp(18px,3.4vw,34px)}
+.picture .q,.picture .a{font-size:clamp(1rem,1.5vw,1.12rem)}
+.picture figcaption,.ex-label{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+html[lang="ar"] .picture figcaption,html[lang="ar"] .ex-label{letter-spacing:0;text-transform:none;font-size:.98rem}
+.picture figcaption{text-align:center;margin-block-start:14px}
+
+/* examples on public documents: four cards, stacked on phones, two by two on wider screens */
+.k-examples .s-title,.k-facts .s-title{font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.1;margin:-12px 0 clamp(22px,3vw,34px);color:var(--ink)}
+html[lang="ar"] .k-examples .s-title,html[lang="ar"] .k-facts .s-title{font-family:var(--font-ar);line-height:1.5}
+.ex-grid{display:grid;gap:clamp(18px,2.4vw,28px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:52em){.ex-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ex{display:grid;gap:10px;align-content:start}
+.ex .app{block-size:100%}
+.ex .app.pending{border-style:dashed;border-color:rgba(242,239,232,.25);background:transparent;box-shadow:none}
+.ex .app.pending .app-body{color:var(--ink-2);font-size:.95rem}
+
+/* feature cards: a gradient border and a faint brass glow */
+ul.facts{list-style:none;margin:0;padding:0;display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:minmax(0,1fr)}
+ul.facts li{position:relative;display:flex;align-items:flex-start;gap:14px;padding:clamp(18px,2.4vw,26px);border-radius:18px;color:var(--ink);font-size:1.08rem;line-height:1.5;
+  border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,
+  linear-gradient(140deg,rgba(221,189,122,.8),rgba(221,189,122,.10) 38%,rgba(242,239,232,.06) 62%,rgba(221,189,122,.55)) border-box;
+  box-shadow:0 22px 50px -32px rgba(200,167,100,.45);transition:transform .35s ease,box-shadow .35s ease}
+ul.facts li:hover{transform:translateY(-2px);box-shadow:0 26px 60px -30px rgba(200,167,100,.6)}
+ul.facts li::before{content:"";flex:none;inline-size:26px;block-size:26px;margin-block-start:1px;
+  background:linear-gradient(135deg,var(--brass-1),var(--brass-3));-webkit-mask:url("assets/star.svg") center/contain no-repeat;mask:url("assets/star.svg") center/contain no-repeat}
+@media (min-width:40em){ul.facts{grid-template-columns:repeat(2,minmax(0,1fr))}ul.facts li:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:62em){ul.facts{grid-template-columns:repeat(6,minmax(0,1fr))}ul.facts li{grid-column:span 2}
+  ul.facts li:nth-child(4):nth-last-child(2){grid-column:2/4}ul.facts li:nth-child(5):last-child{grid-column:4/6}}
+html[lang="ar"] ul.facts li{font-size:1.2rem;line-height:1.7}
+
+/* the page sections on the dark ground */
+section.s{border-block-start-color:rgba(242,239,232,.07)}
+section.s h2{color:var(--accent-ink)}
+.points li>strong:first-child{color:var(--ink)}
+.points li{padding-block-start:18px;border-block-start:1px solid rgba(221,189,122,.35)}
+.k-band{background:var(--paper2);box-shadow:0 0 0 100vmax var(--paper2)}
+.card{background:var(--paper2);border-color:var(--rule);border-radius:16px}
+.feature .card{border:1px solid transparent;background:linear-gradient(var(--paper2),var(--paper2)) padding-box,linear-gradient(140deg,rgba(221,189,122,.75),rgba(221,189,122,.12) 45%,rgba(221,189,122,.5)) border-box}
+ul.results li{border-inline-start-color:var(--brass-2)}
+section.s .cta{border-radius:999px;border-color:var(--accent);color:var(--brass-1);padding:13px 28px}
+section.s .cta:hover{background:rgba(200,167,100,.14);color:var(--brass-1)}
+
+/* the numbers band (Why): large brass figures */
+.k-numbers ul{list-style:none;margin:0;padding:0;display:grid;gap:clamp(22px,3vw,40px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:52em){.k-numbers ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.k-numbers li{color:var(--ink-2);font-size:1.02rem;line-height:1.55;padding-block-start:14px;border-block-start:1px solid rgba(221,189,122,.3)}
+.k-numbers li>strong:first-child{display:block;font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(3rem,7vw,4.6rem);line-height:1;margin-block-end:12px;
+  direction:ltr;unicode-bidi:isolate;inline-size:max-content;max-inline-size:100%;
+  background:linear-gradient(100deg,var(--brass-1),var(--brass-2) 50%,var(--brass-3));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+@media (forced-colors:active){.k-numbers li>strong:first-child{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}}
+html[lang="ar"] .k-numbers li{font-size:1.15rem;line-height:1.8}
+
+/* the closing band: start with a public document */
+section.s.k-next{position:relative;isolation:isolate;text-align:center;margin-block:clamp(36px,7vh,80px) clamp(36px,7vh,80px);
+  padding:clamp(40px,7vw,84px) clamp(18px,5vw,64px);border:1px solid rgba(221,189,122,.26);border-radius:28px;overflow:hidden;
+  background:radial-gradient(110% 130% at 50% 0%,rgba(200,167,100,.22),transparent 58%),var(--paper2)}
+section.s.k-next::before{content:"";position:absolute;inset:0;z-index:-1;background:url("assets/stars.svg") 0 0/72px 72px repeat;opacity:.05}
+section.s.k-next h2{margin-block-end:12px}
+section.s.k-next h3{font-family:var(--font-en);font-weight:var(--display-weight);font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.08;margin:0 0 18px;color:var(--ink);text-wrap:balance}
+html[lang="ar"] section.s.k-next h3{font-family:var(--font-ar);line-height:1.45}
+section.s.k-next p{margin-inline:auto;max-inline-size:40rem;color:var(--ink-2)}
+section.s.k-next .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-block:clamp(22px,3vw,30px)}
+section.s.k-next .ctas p{margin:0}
+section.s.k-next .ctas .cta{margin:0}
+section.s.k-next .cta:not(.cta-2){background:var(--ink);color:var(--paper);border-color:var(--ink);
+  box-shadow:0 0 0 1px rgba(242,239,232,.25),0 0 26px rgba(242,239,232,.18),0 0 60px rgba(200,167,100,.22)}
+section.s.k-next .cta:not(.cta-2):hover{background:#fffaf0;color:var(--paper)}
+footer.foot{border-block-start-color:rgba(242,239,232,.07)}
+.tick{display:inline-block;inline-size:.42em;block-size:.8em;border:solid currentColor;border-width:0 .13em .13em 0;transform:rotate(45deg);margin-inline:.2em .3em;vertical-align:.05em}
+/* inner pages: a shorter opening, a smaller emblem */
+@media (min-width:60em){body:not(.page-home) .decor .emblem{inline-size:clamp(110px,11vw,160px)}body:not(.page-home) .decor .ring{inline-size:clamp(170px,17vw,240px);inset-inline-end:calc(3% - 36px)}}
+.k-numbers li{font-size:1.12rem}
+</style>
 </head>
 <body class="site page-who">
 <header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="Wakeeily — وكيلي"><span class="wm-en" lang="en">Wakeeily</span><span class="wm-sep" aria-hidden="true"></span><span class="wm-ar" lang="ar">وكيلي</span></a><nav class="menu" aria-label="Pages"><a href="index.html">Home</a><a href="who.html" aria-current="page">Who it&#x27;s for</a><a href="pricing.html">Pricing</a><a href="why.html">Why Wakeeily</a><a href="faq.html">Questions</a></nav><nav class="tools" aria-label="Language and sign-in"><a class="switch" href="ar/who.html" lang="ar">العربية</a><a class="signin" href="https://chat.wakeeily.com/">Client sign-in</a></nav></div></header>
 <main><div class="wrap">
-<section class="hero"><h1>For teams that work from their documents</h1>
+<section class="hero"><span class="decor" aria-hidden="true"><span class="stars"></span><span class="ring"></span><span class="emblem"></span></span><h1>For teams that work from their documents</h1>
 <p>Each kind of client, and the task it starts with.</p>
 </section>
 <section class="s s-1 k-cards"><h2>Who it's for</h2>
@@ -187,8 +352,9 @@ html[lang="en"]{--ink-2:#2b3647}@media (prefers-color-scheme:dark){html[lang="en
 <p>Send us the name of a listed company; we send back a one-page read of its latest published statement, every figure with its page, within two working days. Nothing private needed. We take up to two requests a week.</p>
 <p><a class="cta" href="mailto:hello@wakeeily.com?subject=Sample%20read">Ask for a sample read</a></p></section>
 <section class="s s-next k-next"><h2>Next step</h2>
+<h3>Start with a public document</h3>
 <p>Founding offer: the first 5 clients get 30 % off their plan for 12 months. The offer closes on 31 December 2026, or earlier, when the five places are taken.</p>
-<p><a class="cta" href="mailto:hello@wakeeily.com?subject=Discovery%20call">Book a free 30-minute call</a></p></section>
+<div class="ctas"><p><a class="cta" href="mailto:hello@wakeeily.com?subject=Discovery%20call">Book a free 30-minute call</a></p></div></section>
 </div></main>
 <footer class="foot"><div class="wrap">Wakeeily · Egypt · hello@wakeeily.com</div></footer>
 </body>
